@@ -82,6 +82,9 @@ This package provides documentation for %{name}.
 %prep
 %autosetup -n %{srcname}-%{version} -p1
 
+# Temporary workaround for twitch
+sed -i 's/pwkzresl8kj2rdj6g7bvxl9ys1wly3j/kimne78kx3ncx6brgo4mv6wki5h1ko/' src/streamlink/plugins/twitch.py
+
 # Remove shebang
 for i in $(find src/%{srcname}/ -name "*.py"); do
     sed '1{\@^#!/usr/bin/env python@d}' $i >$i.new && \
