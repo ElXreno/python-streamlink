@@ -1,0 +1,114 @@
+diff -up ./setup.py.orig ./setup.py
+--- ./setup.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./setup.py	2019-08-20 10:25:17.204078428 +0200
+@@ -31,7 +31,7 @@ if environ.get("STREAMLINK_USE_PYCRYPTO"
+     deps.append("pycrypto")
+ else:
+     # this version of pycryptodome is known to work and has a Windows wheel for py2.7, py3.3-3.6
+-    deps.append("pycryptodome>=3.4.3,<4")
++    deps.append("pycryptodomex>=3.4.3,<4")
+ 
+ # for localization
+ if environ.get("STREAMLINK_USE_PYCOUNTRY"):
+diff -up ./src/streamlink/plugins/abematv.py.orig ./src/streamlink/plugins/abematv.py
+--- ./src/streamlink/plugins/abematv.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./src/streamlink/plugins/abematv.py	2019-08-20 10:20:15.838839087 +0200
+@@ -9,7 +9,7 @@ import uuid
+ from base64 import urlsafe_b64encode
+ from binascii import unhexlify
+ 
+-from Crypto.Cipher import AES
++from Cryptodome.Cipher import AES
+ 
+ from requests import Response
+ from requests.adapters import BaseAdapter
+diff -up ./src/streamlink/plugins/rtve.py.orig ./src/streamlink/plugins/rtve.py
+--- ./src/streamlink/plugins/rtve.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./src/streamlink/plugins/rtve.py	2019-08-20 10:20:15.838839087 +0200
+@@ -3,7 +3,7 @@ import logging
+ import re
+ from functools import partial
+ 
+-from Crypto.Cipher import Blowfish
++from Cryptodome.Cipher import Blowfish
+ 
+ from streamlink.compat import bytes, is_py3
+ from streamlink.plugin import Plugin, PluginArguments, PluginArgument
+diff -up ./src/streamlink/plugins/steam.py.orig ./src/streamlink/plugins/steam.py
+--- ./src/streamlink/plugins/steam.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./src/streamlink/plugins/steam.py	2019-08-20 10:20:15.839839061 +0200
+@@ -3,8 +3,8 @@ import logging
+ import re
+ import time
+ 
+-from Crypto.Cipher import PKCS1_v1_5
+-from Crypto.PublicKey import RSA
++from Cryptodome.Cipher import PKCS1_v1_5
++from Cryptodome.PublicKey import RSA
+ 
+ import streamlink
+ from streamlink.exceptions import FatalPluginError
+diff -up ./src/streamlink/plugins/ustvnow.py.orig ./src/streamlink/plugins/ustvnow.py
+--- ./src/streamlink/plugins/ustvnow.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./src/streamlink/plugins/ustvnow.py	2019-08-20 10:20:15.839839061 +0200
+@@ -7,9 +7,9 @@ import logging
+ import re
+ from uuid import uuid4
+ 
+-from Crypto.Cipher import AES
+-from Crypto.Hash import SHA256
+-from Crypto.Util.Padding import pad, unpad
++from Cryptodome.Cipher import AES
++from Cryptodome.Hash import SHA256
++from Cryptodome.Util.Padding import pad, unpad
+ 
+ from streamlink import PluginError
+ from streamlink.compat import urljoin, urlparse
+diff -up ./src/streamlink/plugins/webtv.py.orig ./src/streamlink/plugins/webtv.py
+--- ./src/streamlink/plugins/webtv.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./src/streamlink/plugins/webtv.py	2019-08-20 10:20:15.839839061 +0200
+@@ -4,7 +4,7 @@ import base64
+ 
+ import binascii
+ 
+-from Crypto.Cipher import AES
++from Cryptodome.Cipher import AES
+ 
+ from streamlink.plugin import Plugin
+ from streamlink.plugin.api import validate
+diff -up ./src/streamlink/stream/hls.py.orig ./src/streamlink/stream/hls.py
+--- ./src/streamlink/stream/hls.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./src/streamlink/stream/hls.py	2019-08-20 10:20:15.840839035 +0200
+@@ -3,7 +3,7 @@ import re
+ import struct
+ 
+ from collections import defaultdict, namedtuple
+-from Crypto.Cipher import AES
++from Cryptodome.Cipher import AES
+ 
+ from streamlink.exceptions import StreamError
+ from streamlink.stream import hls_playlist
+diff -up ./src/streamlink/utils/crypto.py.orig ./src/streamlink/utils/crypto.py
+--- ./src/streamlink/utils/crypto.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./src/streamlink/utils/crypto.py	2019-08-20 10:20:15.840839035 +0200
+@@ -1,7 +1,7 @@
+ from __future__ import absolute_import
+ import hashlib
+ 
+-from Crypto.Cipher import AES
++from Cryptodome.Cipher import AES
+ 
+ from streamlink.compat import is_py3
+ 
+diff -up ./tests/streams/test_hls.py.orig ./tests/streams/test_hls.py
+--- ./tests/streams/test_hls.py.orig	2019-08-19 18:05:35.000000000 +0200
++++ ./tests/streams/test_hls.py	2019-08-20 10:46:28.301374640 +0200
+@@ -6,7 +6,7 @@ from functools import partial
+ 
+ import pytest
+ import requests_mock
+-from Crypto.Cipher import AES
++from Cryptodome.Cipher import AES
+ from mock import patch, Mock
+ 
+ from streamlink.session import Streamlink

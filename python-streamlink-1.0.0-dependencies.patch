@@ -1,0 +1,12 @@
+diff -up ./setup.py.orig ./setup.py
+--- ./setup.py.orig	2019-01-30 23:18:36.000000000 +0100
++++ ./setup.py	2019-02-04 23:50:40.090594061 +0100
+@@ -13,7 +13,7 @@ deps = [
+     'futures;python_version<"3.0"',
+     # Require singledispatch on Python <3.4
+     'singledispatch;python_version<"3.4"',
+-    "requests>=2.21.0,<3.0",
++    "requests>=2.20.0,<3.0",
+     'urllib3[secure]>=1.23;python_version<"3.0"',
+     "isodate",
+     "websocket-client",
