@@ -13,8 +13,8 @@ Livestreamer, which is no longer maintained.
 %global _with_tests 0%{?fedora} >= 30
 
 Name:           python-%{srcname}
-Version:        1.2.0
-Release:        2%{?dist}
+Version:        1.3.0
+Release:        1%{?dist}
 Summary:        Python library for extracting streams from various websites
 
 # src/streamlink/packages/requests_file.py is ASL 2.0
@@ -28,10 +28,8 @@ Source0:        %{srcname}-%{version}-without-win32-binaries.tar.gz
 Source1:        %{name}-generate-tarball.sh
 # Fix requests version to the latest one available in Fedora
 Patch0:         %{name}-1.0.0-dependencies.patch
-# Fix PlayTV plugin (see https://github.com/streamlink/streamlink/pull/2388)
-Patch1:         %{name}-1.1.1-playtv.patch
 # Use pycryptodomex library instead of crypto
-Patch2:         %{name}-1.2.0-pycryptodomex.patch
+Patch1:         %{name}-1.2.0-pycryptodomex.patch
 
 BuildRequires:  fontpackages-devel
 BuildRequires:  python3-devel
@@ -81,9 +79,6 @@ This package provides documentation for %{name}.
 
 %prep
 %autosetup -n %{srcname}-%{version} -p1
-
-# Temporary workaround for twitch
-sed -i 's/pwkzresl8kj2rdj6g7bvxl9ys1wly3j/kimne78kx3ncx6brgo4mv6wki5h1ko/' src/streamlink/plugins/twitch.py
 
 # Remove shebang
 for i in $(find src/%{srcname}/ -name "*.py"); do
@@ -137,6 +132,9 @@ install -Dpm 0644 build/sphinx/man/%{srcname}.1 $RPM_BUILD_ROOT%{_mandir}/man1/%
 
 
 %changelog
+* Sun Nov 24 2019 ElXreno <elxreno@gmail.com> - 1.3.0-1
+- Updated to version 1.3.0
+
 * Tue Aug 20 2019 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1.2.0-1
 - Update to 1.2.0
 - Use pycryptodomex library instead of crypto
